@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.quakereport;
+package com.example.android.quakereport.controller;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -21,7 +21,11 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.android.quakereport.R;
+import com.example.android.quakereport.model.Earthquake;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
 
@@ -33,21 +37,21 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<String> earthquakes = new ArrayList<>();
-        earthquakes.add("San Francisco");
-        earthquakes.add("London");
-        earthquakes.add("Tokyo");
-        earthquakes.add("Mexico City");
-        earthquakes.add("Moscow");
-        earthquakes.add("Rio de Janeiro");
-        earthquakes.add("Paris");
+        List<Earthquake> earthquakes = new ArrayList<>();
+
+        earthquakes.add(new Earthquake("5.1", "San Francisco", "Feb 2, 2016"));
+        earthquakes.add(new Earthquake("4.8", "London", "Jan 28, 2016"));
+        earthquakes.add(new Earthquake("5.7", "Tokyo", "Jan 21, 2016"));
+        earthquakes.add(new Earthquake("5.8", "Mexico City", "Jan 10, 2016"));
+        earthquakes.add(new Earthquake("6.0", "Moscow", "Jan 2, 2016"));
+        earthquakes.add(new Earthquake("6.1", "Rio de Janeiro", "Dec 30, 2015"));
+        earthquakes.add(new Earthquake("6.5", "Paris", "Dec 28, 2015"));
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
 
         // Create a new {@link ArrayAdapter} of earthquakes
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, earthquakes);
+        ArrayAdapter<Earthquake> adapter = new EarthquakeAdapter(this, earthquakes);
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
